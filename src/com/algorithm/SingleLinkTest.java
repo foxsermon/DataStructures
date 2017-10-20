@@ -136,6 +136,19 @@ public class SingleLinkTest {
 		}
 	}
 	
+	public void reverseList() {
+		Node<Integer> prev, p, next;
+		prev = null;
+		p = start;
+		while (p != null) {
+			next = p.link;
+			p.link = prev;
+			prev = p;
+			p = next;
+		}
+		start = prev;
+	}
+	
 	public void iterateLink() {
 		Node<Integer> p = start;
 		while (p != null) {
@@ -171,7 +184,10 @@ public class SingleLinkTest {
 		link.deleteLastNode();
 		link.iterateLink();
 		
-		link.deleteNode(100);
+		link.deleteNode(10);
+		link.iterateLink();
+		
+		link.reverseList();
 		link.iterateLink();
 		System.out.println("C'est fini :)");
 	}
