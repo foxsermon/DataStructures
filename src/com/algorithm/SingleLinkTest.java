@@ -149,13 +149,24 @@ public class SingleLinkTest {
 		start = prev;
 	}
 	
-	public void iterateLink() {
-		Node<Integer> p = start;
+	public void iterateLink(Node<Integer> origen) {
+		Node<Integer> p = origen;
 		while (p != null) {
 			System.out.print(p.data + " ");
 			p = p.link;
 		}
 		System.out.println("");
+	}
+	
+	public Node<Integer> divideList(Node<Integer> p) {
+		Node<Integer> q = p.link.link;
+		while (q != null && q.link != null) {
+			p = p.link;
+			q = q.link.link;
+		}
+		Node<Integer> start2 = p.link;
+		p.link = null;
+		return start2;
 	}
 	
 	public static void main(String[] args) {
@@ -164,31 +175,37 @@ public class SingleLinkTest {
 		link.insertAtStart(15);
 		link.insertAtStart(25);
 		link.insertAtStart(35);
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.insertAtEnd(5);
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.insertAfterXValue(14, 5);
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.insertBeforeXValue(30, 5);
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.insertAtPosition(33, 3);
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.deleteFirstNode();
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.deleteLastNode();
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.deleteNode(10);
-		link.iterateLink();
+		link.iterateLink(link.start);
 		
 		link.reverseList();
-		link.iterateLink();
+		link.iterateLink(link.start);
+		
+		SingleLinkTest t = new SingleLinkTest();
+		t.start = link.divideList(link.start);
+		System.out.println("-------------");
+		link.iterateLink(link.start);
+		t.iterateLink(t.start);
 		System.out.println("C'est fini :)");
 	}
 }
