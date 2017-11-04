@@ -23,6 +23,11 @@ public class BinaryTree {
 		b.traverseInOder();
 		System.out.println("--------------------------------");
 		b.traversePostOrder();
+		System.out.println("--------------------------------");
+		System.out.println(b.countNodes(b));
+		System.out.println("--------------------------------");
+		System.out.println(b.search(b, 300));
+		System.out.println(b.search(b, 23));
 	}
 	
 	public void addNode(int data) {
@@ -68,5 +73,33 @@ public class BinaryTree {
 			this.right.traversePostOrder();
 		}
 		System.out.print(this.data + ", ");
+	}
+	
+	public int countNodes(BinaryTree root) {
+		if (root == null) {
+			return 0;
+		}else {
+			int i = 1;
+			i += countNodes(root.left);
+			i += countNodes(root.right);
+			return i;
+		}
+	}
+	
+	public boolean search(BinaryTree root, int data) {
+		if (root.data == data) {
+			return true;
+		}
+		if (root.left != null) {
+			if (search(root.left, data)) {
+				return true;
+			}
+		}
+		if (root.right != null) {
+			if (search(root.right, data)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
